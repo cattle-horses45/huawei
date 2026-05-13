@@ -1,0 +1,12 @@
+{
+  "appId": "com.huawei.chatbot",
+  "appName": "华为AI客服",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

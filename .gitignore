@@ -1,0 +1,10 @@
+node_modules/
+backend/data/
+frontend/dist/
+.env
+*.log
+.DS_Store
+Thumbs.db
+android/app/build/
+android/build/
+android/.gradle/
