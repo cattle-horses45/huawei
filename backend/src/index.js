@@ -23,11 +23,27 @@ async function start() {
   app.use('/api/sessions', require('./routes/sessions')(db));
   app.use('/api/knowledge', require('./routes/knowledge')(db));
 
+  // 健康检查
+  app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
   // 静态文件服务（生产环境）
   const frontendBuild = path.join(__dirname, '..', '..', 'frontend', 'dist');
-  app.use(express.static(frontendBuild));
+  const altFrontendBuild = path.join(process.cwd(), 'frontend', 'dist');
+  const staticPath = require('fs').existsSync(frontendBuild) ? frontendBuild : altFrontendBuild;
+
+  console.log(`静态文件路径: ${staticPath}`);
+  console.log(`路径存在: ${require('fs').existsSync(staticPath)}`);
+
+  app.use(express.static(staticPath));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendBuild, 'index.html'));
+    const indexPath = path.join(staticPath, 'index.html');
+    if (require('fs').existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).json({ error: '前端文件未找到', path: staticPath });
+    }
   });
 
   // 启动服务器

@@ -3,8 +3,14 @@ services:
     name: huawei-chatbot
     runtime: node
     region: singapore
-    buildCommand: cd backend && npm install && cd ../frontend && npm install && npm run build
-    startCommand: cd backend && node src/index.js
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: node backend/src/index.js
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_URL
+        value: https://api.deepseek.com/v1/chat/completions
+      - key: PORT
+        value: 10000
