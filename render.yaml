@@ -3,7 +3,7 @@ services:
     name: huawei-chatbot
     runtime: node
     region: singapore
-    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    buildCommand: npm install && npm run install-backend && npm run install-frontend && npm run build
     startCommand: node backend/src/index.js
     envVars:
       - key: NODE_ENV

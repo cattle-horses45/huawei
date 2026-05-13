@@ -1,0 +1,11 @@
+{
+  "name": "huawei-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install-backend": "npm install --prefix backend",
+    "install-frontend": "npm install --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "node backend/src/index.js"
+  }
+}
